@@ -4,18 +4,19 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
+require('dotenv').config();
 
 const task = require("./schema/task.js");
 
-mongoose.connect('mongodb+srv://bhattrishav84_db_user:0wds1TlqZphq0MjJ@tasks.hgsdqn4.mongodb.net/?retryWrites=true&w=majority&appName=tasks')
+mongoose.connect(process.env.DATABASE)
 .then(()=> {
     console.log("Database connection succesful");
     app.listen(5000, ()=> {
         console.log("Server is up and running");
     })
 })
-.catch(()=> {
-    console.log("Couldn't connect to database");
+.catch((err)=> {
+    console.log("Couldn't connect to database"+ err);
 })
 
 app.get("/tasks", async (req, res)=>{
