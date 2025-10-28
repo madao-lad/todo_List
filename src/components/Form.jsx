@@ -46,7 +46,7 @@ function Form() {
 
   const postUserInfo = async () => {
     try {
-      const task = await fetch("http://localhost:5000/", {
+      const task = await fetch("http://localhost:5000/newTask", {
         method: "POST",
         body: JSON.stringify({
           title: title,

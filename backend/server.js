@@ -18,6 +18,14 @@ mongoose.connect(process.env.DATABASE)
 .catch((err)=> {
     console.log("Couldn't connect to database"+ err);
 })
+// })
+// app.post("/addUser", async (req, res) => {
+//     const data = await req.body;
+//     const userInfo = new User({
+//         email: req.body.email,
+//         password: req.body.password,
+//     });
+// })
 
 app.get("/tasks", async (req, res)=>{
     try{
@@ -42,14 +50,14 @@ app.delete("/:_id", async (req, res)=> {
     }
 })
 
-app.post("/", async (req, res)=> {
+app.post("/newTask", async (req, res)=> {
     try{
         const taskDetail = new task({
             title: req.body.title,
             description: req.body.description,
         })
         await taskDetail.save();
-        console.log("User saved");
+        console.log("Task saved");
         res.json("recieved: "+req.body.title);
     }catch(e){
         console.log(e.message);
